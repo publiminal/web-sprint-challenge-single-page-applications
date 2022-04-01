@@ -20,7 +20,7 @@ const Home = (props) => {
             <h2>Your favorite food,<br/> delivered while coding !</h2>
                 <h3 className="bg-projects">
                 {/* <a href="projects.html">My Projects</a> */}
-                <Link id='order-pizza' to={`/pizza/`} >Pizza</Link>
+                <Link id='order-pizza' to={`/pizza`} >Pizza</Link>
                 </h3>
             </div>
             </div>

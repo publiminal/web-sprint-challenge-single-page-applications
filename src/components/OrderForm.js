@@ -1,10 +1,48 @@
 
+import React from 'react'
+
 const OrderForm = (props) => {
+
+    const {
+        values,
+        change,
+        submit,
+        disabled,
+        errors,
+      } = props
+
+      const onSubmit = evt => {
+        evt.preventDefault()
+        submit()
+      }
+    
+      const onChange = evt => {
+        const { name, value, checked, type } = evt.target
+        const valueToUse = type === "checkbox" ? checked : value
+        console.log('Form onChange name ', name )
+        console.log('Form onChange name ', value )
+        change(name, valueToUse)
+      }
+
+
+ 
 
     /* render OrderForm Markup  */
     return (
 
     <form id="pizza-form" >
+
+
+        <div className='errors'>
+            <div>{errors.size}</div>
+            <div>{errors.sauce}</div>
+            <div>{errors.instructions}</div>
+            <div>{errors.username}</div>
+            <div>{errors.quantity}</div>
+        </div>
+      
+
+
         
         <section className="featured">
         <div className="f-box pic-feat pic-me ">
@@ -27,7 +65,11 @@ const OrderForm = (props) => {
             {/* dropdown for : size */}
             <div className="bg-label" >  
                 <label><p className="labeltag" >size : </p>
-                    <select id="size-dropdown" /* onChange={onChange} value={values.role} */ name='choice'>
+                    <select id="size-dropdown" 
+                            onChange={onChange} 
+                            value={values.size} 
+                            name='size'
+                    >
                         <option value=''>Select an option</option>
                         <option value='small'>Personal / Small</option>
                         <option value='family'>Med / Family</option>
@@ -49,8 +91,8 @@ const OrderForm = (props) => {
                     type="radio"
                     name="sauce"
                     value="original-red"
-                    /* onChange={onChange} */
-                    /* checked={values.civil === "single"} */
+                    onChange={onChange}
+                    checked={values.sauce === "original-red"}
                 />
                     <p className="labeltag" >Original Red</p>
                 </label>
@@ -59,8 +101,8 @@ const OrderForm = (props) => {
                     type="radio"
                     name="sauce"
                     value="garlic-ranch"
-                    /* onChange={onChange} */
-                    /* checked={values.civil === "single"} */
+                    onChange={onChange}
+                    checked={values.sauce === "garlic-ranch"}
                 />
                     <p className="labeltag" >Garlic Ranch</p>
                 </label>
@@ -69,8 +111,8 @@ const OrderForm = (props) => {
                     type="radio"
                     name="sauce"
                     value="bbq-sauce"
-                    /* onChange={onChange} */
-                    /* checked={values.civil === "single"} */
+                    onChange={onChange}
+                    checked={values.sauce === "bbq-sauce"}
                 />
                     <p className="labeltag" >BBQ Sauce</p>
                 </label>
@@ -79,8 +121,8 @@ const OrderForm = (props) => {
                     type="radio"
                     name="sauce"
                     value="spinach-alfredo"
-                    /* onChange={onChange} */
-                    /* checked={values.civil === "single"} */
+                    onChange={onChange}
+                    checked={values.sauce === "spinach-alfredo"}
                 />
                     <p className="labeltag" >Spinach Alfredo</p>
                 </label>
@@ -99,8 +141,8 @@ const OrderForm = (props) => {
                     <input
                         type="checkbox"
                         name="pepperoni"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        onChange={onChange}
+                        checked={values.pepperoni}
                     />
                     <p className="labeltag" >Pepperoni</p>
                 </label>
@@ -109,8 +151,8 @@ const OrderForm = (props) => {
                     <input
                         type="checkbox"
                         name="sousage"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        onChange={onChange}
+                        checked={values.sousage}
                     />
                     <p className="labeltag" >Sousage</p>
                 </label>
@@ -118,9 +160,9 @@ const OrderForm = (props) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="canadian-bacon"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        name="canadianBacon"
+                        onChange={onChange}
+                        checked={values.canadianBacon}
                     />
                     <p className="labeltag" >Canadian bacon</p>
                 </label>
@@ -128,9 +170,9 @@ const OrderForm = (props) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="spicy-italian-sauce"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        name="spicyItalianSauce"
+                        onChange={onChange}
+                        checked={values.spicyItalianSauce}
                     />
                     <p className="labeltag" >Spicy Italian Sauce</p>
                 </label>
@@ -138,9 +180,9 @@ const OrderForm = (props) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="grilled-chicken"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        name="grilledChicken"
+                        onChange={onChange}
+                        checked={values.grilledChicken}
                     />
                     <p className="labeltag" >Grilled Chicken</p>
                 </label>
@@ -149,8 +191,8 @@ const OrderForm = (props) => {
                     <input
                         type="checkbox"
                         name="onions"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        onChange={onChange}
+                        checked={values.onions}
                     />
                     <p className="labeltag" >Onions</p>
                 </label>
@@ -158,9 +200,9 @@ const OrderForm = (props) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="green-pepper"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        name="greenPepper"
+                        onChange={onChange}
+                        checked={values.greenPepper}
                     />
                     <p className="labeltag" >Green Pepper</p>
                 </label>
@@ -168,9 +210,9 @@ const OrderForm = (props) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="Diced-tomatos"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        name="dicedTomatos"
+                        onChange={onChange}
+                        checked={values.dicedTomatos}
                     />
                     <p className="labeltag" >Diced Tomatos</p>
                 </label>
@@ -178,9 +220,9 @@ const OrderForm = (props) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="black-olives"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        name="blackOlives"
+                        onChange={onChange}
+                        checked={values.blackOlives}
                     />
                     <p className="labeltag" >Black Olives</p>
                 </label>
@@ -188,9 +230,9 @@ const OrderForm = (props) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="roasted-garlic"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        name="roastedGarlic"
+                        onChange={onChange}
+                        checked={values.roastedGarlic}
                     />
                     <p className="labeltag" >Roasted Garlic</p>
                 </label>
@@ -198,9 +240,9 @@ const OrderForm = (props) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="artichoke-hearts"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        name="artichokeHearts"
+                        onChange={onChange}
+                        checked={values.artichokeHearts}
                     />
                     <p className="labeltag" >Artichoke Hearts</p>
                 </label>
@@ -208,9 +250,9 @@ const OrderForm = (props) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="three-cheese"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        name="threeCheese"
+                        onChange={onChange}
+                        checked={values.threeCheese}
                     />
                     <p className="labeltag" >Three Cheese</p>
                 </label>
@@ -219,8 +261,8 @@ const OrderForm = (props) => {
                     <input
                         type="checkbox"
                         name="pineapple"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        onChange={onChange}
+                        checked={values.pineapple}
                     />
                     <p className="labeltag" >Pineapple</p>
                 </label>
@@ -228,9 +270,9 @@ const OrderForm = (props) => {
                 <label>
                     <input
                         type="checkbox"
-                        name="extra-cheese"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        name="extraCheese"
+                        onChange={onChange}
+                        checked={values.extraCheese}
                     />
                     <p className="labeltag" >Extra Cheese</p>
                 </label>
@@ -248,8 +290,8 @@ const OrderForm = (props) => {
                     <input
                         type="checkbox"
                         name="substitute"
-                        /* onChange={onChange} */
-                        /* checked={values.civil === "single"} */
+                        onChange={onChange}
+                        checked={values.substitute}
                     />
                     <p className="labeltag" >Gluten Free Crust (+ $1.00)</p>
                 </label>
@@ -266,8 +308,8 @@ const OrderForm = (props) => {
             <label>
                 <p className="labeltag" >Anything else you'd like to add ?</p>
                 <input id="special-text"
-                   /*  value={values.username} */
-                    /* onChange={onChange} */
+                    value={values.instructions}
+                    onChange={onChange}
                     name='instructions'
                     type='text'
                     size="90" 
@@ -287,9 +329,9 @@ const OrderForm = (props) => {
             <label>
                 <p className="labeltag" >Your name</p>
                 <input id="name-input"
-                   /*  value={values.username} */
-                    /* onChange={onChange} */
-                    name='instructions'
+                    value={values.username}
+                    onChange={onChange}
+                    name='username'
                     type='text'
                     size="90" 
                 />
@@ -308,15 +350,15 @@ const OrderForm = (props) => {
             <label>
                 <p className="labeltag" >Quantity </p>
                 <input
-                   /*  value={values.username} */
-                    /* onChange={onChange} */
+                    value={values.quantity}
+                    onChange={onChange}
                     min="1" 
                     max="100"
                     name='quantity'
                     type='number'
                     size="10"
                 />
-                <button className="sendBtn"/* disabled={disabled} */>{`Add to order   %17.99 `  }</button>
+                <button id='order-pizza' className="sendBtn"disabled={disabled}>{`Add to order   %17.99 `  }</button>
                 </label>
             </div>
         </article>

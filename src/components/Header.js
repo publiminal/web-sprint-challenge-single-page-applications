@@ -15,7 +15,7 @@ const Header = (props) => {
                 {/* <a href="about.html">Help</a> */}
                 <Link to={`/`} >Home</Link>
                 <Link to={`/help/`} >Help</Link>
-                <Link to={`/pizza/`} >Pizza</Link>
+                <Link id='order-button' to={`/pizza`} >Pizza</Link>
               </nav>  
             </header>
         </section>
