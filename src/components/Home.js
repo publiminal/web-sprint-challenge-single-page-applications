@@ -35,7 +35,7 @@ const Home = (props) => {
                 <div className="a-box-sh"><p>in instruments</p></div>
             </div>
             <div className="a-box bg-3">
-                <div className="a-box-sh"><p>cat hair</p></div>
+                <div className="a-box-sh"><p>and cat hair</p></div>
             </div>
     
         </section>  

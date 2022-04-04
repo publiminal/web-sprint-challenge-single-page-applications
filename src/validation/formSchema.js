@@ -4,7 +4,8 @@ import * as yup from "yup";
 const formSchema = yup.object().shape({
     size: yup // dropdown size choice
     .string()
-    .oneOf(["small", "family", "jumbo"], "Don't forget to choose your size"),
+    .oneOf(["small", "family", "jumbo"], "Don't forget to choose your size")
+    .required("This Choice is required"),
     sauce: yup // radiobutons sauce choice
     .string()
     .oneOf(["original-red", 
@@ -12,8 +13,8 @@ const formSchema = yup.object().shape({
             "bbq-sauce",
             "spinach-alfredo"
         ]
-        , "You've gotta be married or single, pal!"),
-    pepperoni: yup.boolean(),// toppings
+        , "Choose your sauce"),
+    pepperoni: yup.boolean().oneOf([true], 'This field must be checked'),// toppings 
     sousage: yup.boolean(),
     canadianBacon: yup.boolean(),
     spicyItalianSauce: yup.boolean(),
@@ -27,17 +28,17 @@ const formSchema = yup.object().shape({
     threeCheese: yup.boolean(),
     pineapple: yup.boolean(),
     extraCheese: yup.boolean(),
-    substitute: yup.boolean(), // substitute
+/*     substitute: yup.boolean(), // substitute */
     username: yup // input username
     .string()
     .trim()
-    .required("name must be at least 2 characters")
+    .required("name is required")
     .min(2, "name must be at least 2 characters"),
-    instructions: yup // input special instructions
+   /*  instructions: yup // input special instructions
     .string()
     .trim()
     .required("Add any special detail to take care of your pizza")
-    .min(0, "Nothing ?"),
+    .min(0, "Nothing ?"), */
     quantity: yup // input quantity
     .string()
     .trim()

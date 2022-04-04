@@ -331,6 +331,7 @@ p,a {
       font-size: 1.2rem;
       font-style: italic;
       font-weight: bold;
+      display: inline-block;
   }
 
 .bg-label{
@@ -356,4 +357,18 @@ form label {
 .sendBtn{
   width: 85%;
   margin-left: 5rem;
+}
+
+.errors{
+  /* position: sticky; */
+  /* width: 50%; */
+  /* bottom: 0; */
+  background-color: #ffa500ba;
+  color: rgb(1 1 4 / 81%);
+  /* margin-bottom: 3rem; */
+  border-radius: 10px;
+  margin-left: 1rem;
+  padding:  .1rem 1rem;
+  display: inline-block;
+
 }
