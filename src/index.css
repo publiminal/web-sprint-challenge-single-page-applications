@@ -337,7 +337,7 @@ p,a {
 .bg-label{
   background-color: rgb(0, 4, 17, 0.9);
   width: 100%;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 .labeltag{
   display:inline-block;
