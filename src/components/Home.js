@@ -26,18 +26,6 @@ const Home = (props) => {
                 {orders.map(order => (
                      <Order info={order}  />
                 ))}
-
-
-
-{/*                 <div className="a-box bg-1">
-                    <div className="a-box-sh"><p>I love strings</p></div>
-                </div>
-                <div className="a-box bg-2">
-                    <div className="a-box-sh"><p>in instruments</p></div>
-                </div>
-                <div className="a-box bg-3">
-                    <div className="a-box-sh"><p>and cat hair</p></div>
-                </div> */}
             {props.children}
         </section> 
         )
