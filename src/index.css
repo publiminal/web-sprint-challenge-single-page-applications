@@ -372,3 +372,23 @@ form label {
   display: inline-block;
 
 }
+p.info{
+  font-size: 1.3rem;
+  background-color: rgba(255, 127, 80, 0.644);
+  display: inline-block;
+  width: 11%;
+  color: black;
+  /* top: -102px; */
+  position: relative;
+  bottom: -43.5%;
+  padding: 0.3rem;
+  /* margin: 0 auto; */
+  width: 100%;
+  border-radius: 6px;
+}
+
+p.low{
+  /* padding: 1rem; */
+  font-size: 1rem;
+  /* display: inline-block; */
+}

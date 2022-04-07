@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import axios from "axios";
 import Home from "./components/Home";
 import Header from "./components/Header";
@@ -94,12 +94,13 @@ const App = () => {
   const [formValues, setFormValues] = useState(initialFormValues) // object
   const [formErrors, setFormErrors] = useState(initialFormErrors) // object
   const [disabled, setDisabled] = useState(initialDisabled)       // boolean
+  const [redirectForm, setRedirectForm] = useState(false)
 
 
   //////////////// HELPERS ////////////////
   const getPizza = () => {
     // 🔥 STEP 5- IMPLEMENT! ON SUCCESS PUT pizzaIN STATE
-    //    helper to [GET] all pizza from `http://buddies.com/api/pizza`
+    //    helper to [GET] all pizza from `https://reqres.in/api/orders`
     axios.get("https://reqres.in/api/orders")
       .then(res => {
         setPizza(res.data);
@@ -108,13 +109,17 @@ const App = () => {
 
   const postNewPizza = newPizza => {
     // 🔥 STEP 6- IMPLEMENT! ON SUCCESS ADD NEWLY CREATED FRIEND TO STATE
-    //    helper to [POST] `newPizza` to `http://buddies.com/api/Friends`
+    //    helper to [POST] `newPizza` to `https://reqres.in/api/orders`
     //    and regardless of success or failure, the form should reset
-    axios.post("https://reqres.in/api/orders", newPizza)
+    axios.post("https://reqres.in/api/orders/", newPizza)
       .then(res => {
         setPizza([res.data, ...pizza]);
       }).catch(err => console.error(err))
-      .finally(() => setFormValues(initialFormValues))
+      .finally(() => {
+        setFormValues(initialFormValues) // reset form
+        setRedirectForm(true); // enable  redirect 
+
+      })
   }
 
   const validate = (name, value) => {
@@ -144,21 +149,25 @@ const App = () => {
   }
 
   const formSubmit = () => {
+    // console.log('formSubmit')
     const newPizza = {
       username: formValues.username.trim(),
-      email: formValues.email.trim(),
-      role: formValues.role.trim(),
-      civil: formValues.civil.trim(),
+      size: formValues.size.trim(),
+      sauce: formValues.sauce.trim(),
+      quantity: formValues.quantity.trim(),
       toppings: toppingsList.filter(topping => !!formValues[topping])
     }
-    postNewPizza(newPizza);
+    // console.log('newPizza', newPizza)
+    postNewPizza(newPizza)
   }
 
+  /* Control Send form Button availability every time formValues changes. */
   useEffect(() => {
     schema.isValid(formValues).then(valid => {
       setDisabled(!valid)
-      console.log(`disabled`, disabled)
+      setRedirectForm(false); // disable redirect in orderForm
       if (!valid) {
+     
         // console.log(`validate form uncomplete`)
 
       }
@@ -181,11 +190,12 @@ const App = () => {
             submit={formSubmit}
             disabled={disabled}
             errors={formErrors}
+            redirectForm={redirectForm}
           />
         </Route>
 
         <Route path='/'>
-          <Home  /* titlePage={setDocTitle} */ ></Home>
+          <Home pizza={pizza} /* titlePage={setDocTitle} */ ></Home>
         </Route>
       </Switch>
 

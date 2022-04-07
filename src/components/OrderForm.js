@@ -1,5 +1,7 @@
 
 import React from 'react'
+import { Redirect } from "react-router-dom";
+
 /* import { uuid } from 'uuidv4'; */
 
 
@@ -62,6 +64,7 @@ function DropDown(props) {
                 <option value={props.info.valueName2}>{props.info.valueDesc2}</option>
                 <option value={props.info.valueName3}>{props.info.valueDesc3}</option>
             </select>
+            { props.errors &&<ErrorField name={props.errors[props.name]} /> }
         </label>
     )
 }
@@ -79,7 +82,7 @@ function Article(props) {
             <div className="header-banner">
                 <h3>{props.title}</h3>
                 {props.isRequired && <p className="required">{props.requiredText}</p>}
-                <ErrorField name={props.errorsName} />
+                {props.errorsName &&<ErrorField name={props.errorsName} />}
 
             </div>
             <div className="bg-label" >
@@ -98,9 +101,11 @@ const OrderForm = (props) => {
         submit,
         disabled,
         errors,
+        redirectForm
     } = props
 
     const onSubmit = evt => {
+        // console.log('onSubmit', evt);
         evt.preventDefault()
         submit()
     }
@@ -160,7 +165,12 @@ const OrderForm = (props) => {
                     </div>
                 </div>
             </section>
-            <Article title={'Choice of Size'} isRequired={true} requiredText={'Required'} errorsName={errors.size}  >
+            <Article 
+                title={'Choice of Size'} /* display text header H3 */ 
+                isRequired={true} /* display required small caption   */
+                requiredText={'Required'}  /* required caption text below H3 */
+                errorsName={errors.size}  /* YUP error. Send empty string if no YUP error message required */
+            >
                 <DropDown
                     name='size'
                     value={values.size}
@@ -170,6 +180,7 @@ const OrderForm = (props) => {
                         valueName2: 'family', valueDesc2: 'Med / Family',
                         valueName3: 'jumbo', valueDesc3: 'Jumbo / Large'
                     }}
+                    /* errors={errors} */ /* uncomment to display YUP error inline dropdown */
                 />
             </Article>
             <Article title={'Choice of Sauce'} isRequired={true} requiredText={'Required'} errorsName={errors.sauce} >
@@ -248,7 +259,8 @@ const OrderForm = (props) => {
                         type='number'
                         size="10"
                     />
-                    <button id='order-pizza' className="sendBtn" disabled={disabled}>{`Add to order   %17.99 `}</button>
+                    <button id='order-pizza' onClick={onSubmit} className="sendBtn" disabled={disabled}>{`Add to order   %17.99 `}</button>
+                    {redirectForm && <Redirect to='/' />}
                 </label>
             </Article>
         </form>

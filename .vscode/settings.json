@@ -1,7 +1,11 @@
 {
     "cSpell.words": [
+        "getPizza",
         "labeltag",
         "sousage",
         "Tomatos"
+    ],
+    "cSpell.ignoreWords": [
+        "getPizza"
     ]
 }
